@@ -25,4 +25,11 @@ public class IssueService {
     public List<Issue> getIssuesByProject(Project project) {
         return issueRepository.findByProject(project);
     }
+
+
+    public Issue getIssueById(Long issueId) {
+        return issueRepository.findById(issueId)
+                .orElseThrow(() -> new RuntimeException("Issue not found"));
+    }
+
 }
