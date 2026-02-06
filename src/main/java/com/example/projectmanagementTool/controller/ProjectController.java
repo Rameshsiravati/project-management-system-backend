@@ -1,5 +1,6 @@
 package com.example.projectmanagementTool.controller;
 
+import com.example.projectmanagementTool.dto.ProjectResponse;
 import com.example.projectmanagementTool.model.Project;
 import com.example.projectmanagementTool.model.User;
 import com.example.projectmanagementTool.service.ProjectService;
@@ -32,7 +33,7 @@ public class ProjectController {
     }
 
     @GetMapping
-    public List<Project> getMyProjects(Authentication authentication) {
+    public List<ProjectResponse> getMyProjects(Authentication authentication) {
         User user = userService.getUserByEmail(authentication.getName());
         return projectService.getProjectsByOwner(user);
     }
