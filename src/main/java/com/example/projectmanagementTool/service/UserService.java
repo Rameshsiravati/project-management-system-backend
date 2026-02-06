@@ -1,5 +1,6 @@
 package com.example.projectmanagementTool.service;
 
+import com.example.projectmanagementTool.exception.ResourceNotFoundException;
 import com.example.projectmanagementTool.model.User;
 import com.example.projectmanagementTool.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,7 +33,7 @@ public class UserService {
         Optional<User> optionalUser = userRepository.findByEmail(email);
 
         if (optionalUser.isEmpty()) {
-            throw new RuntimeException("User not found");
+            throw new ResourceNotFoundException("User not found");
         }
 
         User user = optionalUser.get();
@@ -48,6 +49,6 @@ public class UserService {
 
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 }

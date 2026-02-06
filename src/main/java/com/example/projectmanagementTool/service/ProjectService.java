@@ -1,5 +1,6 @@
 package com.example.projectmanagementTool.service;
 
+import com.example.projectmanagementTool.exception.AccessDeniedException;
 import com.example.projectmanagementTool.model.Project;
 import com.example.projectmanagementTool.model.User;
 import com.example.projectmanagementTool.repository.ProjectRepository;
@@ -27,7 +28,7 @@ public class ProjectService {
 
     public Project getProjectById(Long projectId, User owner) {
         return projectRepository.findByIdAndOwner(projectId, owner)
-                .orElseThrow(() -> new RuntimeException("Access denied or project not found"));
+                .orElseThrow(() -> new AccessDeniedException("Access denied or project not found"));
     }
 
     public Project updateProject(Long projectId, Project updatedProject, User owner) {
